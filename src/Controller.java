@@ -34,6 +34,11 @@ public class Controller {
             if(s.equals("$") && input.equals("$")) {
                 fileUtil.write("匹配成功,完成! ");
                 break;
+            } else if(s.equals(")") && input.equals(")")){
+                //右括号的问题(仍存在疑问)
+                stack.pop();
+                i++;
+                input = tokens.get(i);
             } else {
                 String cfg = table.getCFG(s,input);
                 if(cfg.equals("error")){
@@ -55,17 +60,16 @@ public class Controller {
                         }
                         i++;
                         input = tokens.get(i);
-                    }else if(split[0].equals("ε")) {
-                        //若文法推出ε,则直接弹出栈顶
+                    }else {
+                        //否则压栈,从右向左压。若是推出ε,则直接弹出栈顶
                         fileUtil.write(cfg+"\n");
                         stack.pop();
-                    } else {
-                        //否则压栈,从右向左压
-                        fileUtil.write(cfg+"\n");
-                        stack.pop();
-                        for(int j = split.length-1;j>=0;j--) {
-                            stack.push(split[j]);
+                        if(!split[0].equals("ε")) {
+                            for(int j = split.length-1;j>=0;j--) {
+                                stack.push(split[j]);
+                            }
                         }
+
                     }
                 }
             }
