@@ -1,0 +1,20 @@
+E->TE'
+T->FT'
+F->id  匹配: id
+T'->ε
+E'->+TE'  匹配: +
+T->FT'
+F->id  匹配: id
+T'->*FT'  匹配: *
+F->number  匹配: number
+T'->*FT'  匹配: *
+F->(E)  匹配: (
+E->TE'
+T->FT'
+F->id  匹配: id
+T'->ε
+E'->+TE'  匹配: +
+T->FT'
+F->number  匹配: number
+T'->ε
+E'->ε
